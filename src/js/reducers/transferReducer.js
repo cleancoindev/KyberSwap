@@ -40,11 +40,6 @@ const transfer = (state = initState, action) => {
     case "TRANSFER.GO_TO_STEP":
       newState.step = action.payload
       return newState
-    case "TRANSFER.TRANSFER_SPECIFY_ADDRESS_RECEIVE":
-      newState.destAddress = action.payload
-      newState.errors.destAddress = {}
-      newState.errors.sourceAmount = {}
-      return newState
     case "TRANSFER.SET_DEST_ETH_NAME_AND_ADDRESS":
       const { destEthName, destAddress } = action.payload;
       newState.destEthName = destEthName;
@@ -195,6 +190,10 @@ const transfer = (state = initState, action) => {
 
     case "TRANSFER.FORWARD_TRANSFER_PATH":{
       newState.currentPathIndex += 1
+      return newState
+    }
+    case "GLOBAL.CLEAR_SESSION_FULFILLED": {
+      newState.errors.sourceAmount = {};
       return newState
     }
   }
